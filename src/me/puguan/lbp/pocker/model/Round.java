@@ -6,7 +6,7 @@
 package me.puguan.lbp.pocker.model;
 
 /**
- *
+ * Enum indicating the phase of a round.
  * @author pguan
  */
 public enum Round {

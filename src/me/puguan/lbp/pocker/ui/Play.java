@@ -18,55 +18,76 @@ import me.puguan.lbp.pocker.model.Handful;
  * @author pguan
  */
 public class Play {
-    public static void main(String[] args) {
+    public Handful play() {
+        List<Handful> players= new ArrayList<>();
         Deck deck = new Deck();
-        Card[] cards = new Card[7];
-//        cards[0] = new Card(Shape.HEARTS, Number.Two);
-//        cards[1] = new Card(Shape.SPADES, Number.Eight);
-//        cards[2] = new Card(Shape.CLUBS, Number.Seven);
-//        cards[3] = new Card(Shape.HEARTS, Number.Five);
-//        cards[4] = new Card(Shape.SPADES, Number.King);
-//        cards[5] = new Card(Shape.DIAMANDS, Number.Six);
-//        cards[6] = new Card(Shape.DIAMANDS, Number.King);
+        Card[] cards = new Card[5];
+        cards[0] = deck.next();
+        cards[1] = deck.next();
+        cards[2] = deck.next();
+        cards[3] = deck.next();
+        cards[4] = deck.next();
+
+        //Arrays.asList(cards).stream().forEach(card -> System.out.print(card.toString() + ","));
+        //System.out.println();
+
         int i = 0;
-        while(i<7) {
-            cards[i]= deck.next();
+        Card[][] privateCards = new Card[6][2];
+        while(i<6) {
+            privateCards[i] = new Card[2];
+            for (int j = 0; j < 2; j++) {
+                privateCards[i][j] = deck.next();
+                //System.out.print(privateCards[i][j].toString()+",");
+            }
+            //System.out.println();
+            Handful myHandful = pickHandful(joinCards(cards, privateCards[i]));
+            //Arrays.asList(myHandful.getCards()).stream().forEach(card -> System.out.print(card.toString() + ","));
+            //System.out.println();
+            players.add(myHandful);
             i++;
         }
-        
-        Handful myHandful = pickHandful(cards);
-        System.out.println(myHandful.getMark());
-        Arrays.asList(cards).stream().forEach(card->System.out.print(card.toString()+","));
-        System.out.println();
-        Arrays.asList(myHandful.getCards()).stream().forEach(card -> System.out.print(card.toString() + ","));
+        Handful max = players.stream().max(Handful::compareTo).get();
+        return max;
     }
     
+    private Card[] joinCards(Card[] pub, Card[] pri) {
+        Card[] cards = new Card[7];
+        for (int i = 0; i < 7; i++) {
+            if(i<5) {
+                cards[i] = pub[i];
+            } else {
+                cards[i] = pri[i-5];
+            }
+            
+        }
+        return cards;
+    }
     /**
      * Choose the best five from seven cards.
+     *
      * @param cards
-     * @return 
+     * @return
      */
-    public static Handful pickHandful(Card[] cards) {
+    private Handful pickHandful(Card[] cards) {
         List<Handful> list = new ArrayList<>();
         int i = 0;
-        while(i<7) {
+        while (i < 7) {
             int j = 0;
-            while(j<i){
+            while (j < i) {
                 List<Card> templist = new ArrayList<>();
-                for(int index=0;index<7;index++) {
-                    if(index==i || index==j) {
+                for (int index = 0; index < 7; index++) {
+                    if (index == i || index == j) {
                         continue;
                     }
                     templist.add(cards[index]);
                 }
-                list.add(new Handful(templist.toArray(new Card[5])));    
+                list.add(new Handful(templist.toArray(new Card[5])));
                 j++;
-            }       
+            }
             i++;
         }
         return Collections.max(list);
-    }
-    
+    } 
     
 }
 

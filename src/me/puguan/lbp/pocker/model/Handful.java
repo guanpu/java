@@ -5,7 +5,9 @@
  */
 package me.puguan.lbp.pocker.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,7 +16,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
- *
+ * A collection of five cards with an intrinsic "Mark" used to compare with each other.
  * @author pguan
  */
 public class Handful implements Comparable<Handful> {
@@ -50,7 +52,7 @@ public class Handful implements Comparable<Handful> {
      * is 8, unlike those only need 1 characteristic card. mark would around
      * 6993843536
      */
-    private static final int DOUBLE_PAIR = 28;
+    //private static final int DOUBLE_PAIR = 28;
     private static final int SINGLE_PAIR = 20;
 
     private long mark;
@@ -89,33 +91,43 @@ public class Handful implements Comparable<Handful> {
             case 2: //Four kind or full_house
                 if ((char_num = isFourKind()) > 0) {
                     literal = char_num << FOUR_KIND;
+                    setTitle(Combination.Four);
                     break;
                 }
                 char_num = isThreeKind();
+                setTitle(Combination.FULLHOUSE);
                 literal = char_num << FULL_HOUSE;
                 break;
             case 3: //Three_kind or two pair
                 if ((char_num = isThreeKind()) > 0) {
                     literal = char_num << THREE_KIND;
+                    setTitle(Combination.THREE);
                     break;
                 } else {
                     char_num = isPair();
+                    setTitle(Combination.TWOPAIR);
                     literal = char_num << SINGLE_PAIR;
                     break;
                 }
             case 4:
                 char_num = isPair();
+                setTitle(Combination.PAIR);
                 literal = char_num << SINGLE_PAIR;
                 break;
             default:
                 if ((char_num = isStraight()) > 0) {
                     if (isFlush()) {
                         literal = char_num << STRIGHT_FLUSH;
+                        setTitle(Combination.SF);
                     } else {
                         literal = char_num << STRIGHT;
+                        setTitle(Combination.STRIGHT);
                     }
                 } else if (isFlush()) {
                     literal = 1L << FLUSH;
+                    setTitle(Combination.FLUSH);
+                } else {
+                    setTitle(Combination.OTHER);
                 }
                 break;
         }
@@ -238,8 +250,29 @@ public class Handful implements Comparable<Handful> {
      *
      * @param mark new value of mark
      */
-    public final void setMark(long mark) {
+    private final void setMark(long mark) {
         this.mark = mark;
     }
+    
+        private Combination title;
+
+    /**
+     * Get the value of title
+     *
+     * @return the value of title
+     */
+    public Combination getTitle() {
+        return title;
+    }
+
+    /**
+     * Set the value of title
+     *
+     * @param title new value of title
+     */
+    private void setTitle(Combination title) {
+        this.title = title;
+    }
+
 
 }

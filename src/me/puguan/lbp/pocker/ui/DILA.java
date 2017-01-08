@@ -9,8 +9,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import me.puguan.lbp.pocker.model.Deck;
 import me.puguan.lbp.pocker.model.Round;
 

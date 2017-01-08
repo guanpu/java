@@ -6,7 +6,7 @@
 package me.puguan.lbp.pocker.model;
 
 /**
- *
+ * Enum indicating the shape of a card.
  * @author pguan
  */
 public enum Shape {
@@ -34,10 +34,14 @@ public enum Shape {
      *
      * @param name new value of name
      */
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }    
     
+    /**
+     * Use the first char to indicate the shape.
+     * @return 
+     */
     @Override
     public String toString() {
         return String.valueOf(name.charAt(0));

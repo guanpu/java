@@ -6,7 +6,7 @@
 package me.puguan.lbp.pocker.model;
 
 /**
- *
+ * Enum the number of a card.
  * @author pguan
  */
 public enum Number implements Comparable<Number>{
@@ -27,7 +27,9 @@ public enum Number implements Comparable<Number>{
     private Number(int value) {
         this.value = value;
     }
-
+    /**
+     * The value of this number, ranging from 1-13.
+     */
     private int value;
 
     /**
@@ -48,9 +50,25 @@ public enum Number implements Comparable<Number>{
         this.value = value;
     }
 
+    /**
+     * The 'name' of the card.
+     * @return 
+     */
     @Override
     public String toString() {
-        return String.valueOf(value+1);
+        if(value<9){
+            return String.valueOf(value + 1);
+        } else if(value == 10) {
+            return "T";
+        } else if(value == 11) {
+            return "J";
+        } else if(value == 12) {
+            return "Q";
+        } else if(value == 13) {
+            return "K";
+        } else {
+            return "A";
+        }
     }
     
 }
