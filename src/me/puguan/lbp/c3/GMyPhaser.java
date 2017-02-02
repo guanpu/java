@@ -22,12 +22,10 @@ public class GMyPhaser extends Phaser{
             case 1:
                 System.out.printf("%d has finished \n", phase);
                 System.out.printf("There's %d parties left \n", registeredParties);
-
                 return false;
             case 2:
                 System.out.printf("%d has finished \n", phase);
                 System.out.printf("There's %d parties left \n", registeredParties);
-
                 return false;
             default:
                 return true;
