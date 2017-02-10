@@ -5,17 +5,15 @@
  */
 package me.puguan.lbp.c4;
 
-import java.util.Date;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author pguan
  */
-public class ATask implements Runnable{
-
+public class CTask implements Callable<String>{
+    
     private String name;
 
     /**
@@ -36,21 +34,17 @@ public class ATask implements Runnable{
         this.name = name;
     }
 
-    public ATask(String name) {
+    public CTask(String name) {
         this.name = name;
     }
 
+
     @Override
-    public void run() {
-        System.out.printf("Thread %d started at %d \n", Thread.currentThread().getId(), new Date().getTime());
-        long interval = 2000L;
-        try {
-            TimeUnit.MILLISECONDS.sleep(interval);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ATask.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.printf("Thread %d ends at %d \n", Thread.currentThread().getId(), new Date().getTime());
-        
+    public String call() throws Exception {
+        System.out.printf("%d is running \n", Thread.currentThread().getId());
+        TimeUnit.MILLISECONDS.sleep((long) (Math.random() * 5000 + 2000L));
+        return name;
     }
+    
     
 }
