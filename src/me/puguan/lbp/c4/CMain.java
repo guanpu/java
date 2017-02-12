@@ -5,29 +5,17 @@
  */
 package me.puguan.lbp.c4;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Play with ShceduledThreadPoolExecutor.
  * @author pguan
  */
 public class CMain {
-
-    private String trimString(String a) {
-        return a.trim();
-    }
 
     public static void main(String[] args) throws InterruptedException {
         ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(2);

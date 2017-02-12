@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- *
+ * Play with ThreadPoolExecutor.
  * @author pguan
  */
 public class BMain {
