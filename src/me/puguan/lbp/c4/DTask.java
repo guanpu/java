@@ -7,8 +7,6 @@ package me.puguan.lbp.c4;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A simple task to be cancel
