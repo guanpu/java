@@ -6,7 +6,7 @@
 package effectivejava.chapter10;
 
 /**
- *
+ * Prime number counter
  * @author pguan
  */
 public class SingleThreadCounter {
